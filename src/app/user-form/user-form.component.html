@@ -1,0 +1,80 @@
+<div class="container row">
+  <div class="column">
+  <h2>User Form</h2>
+  <br/>
+  <form (ngSubmit)="submitUser(user, userForm.form)" #userForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+             [(ngModel)]="user.name" name="name" #name="ngModel" required>
+      <div [hidden]="name.valid || name.pristine"
+           class="required-alert"> Name is required.
+      </div><br/>
+
+      <label for="surname">Surname</label>
+      <input type="text" class="form-control" id="surname" #surname="ngModel"
+             [(ngModel)]="user.surname" name="surname" required>
+      <div [hidden]="surname.valid || surname.pristine"
+           class="required-alert"> Surname is required.
+      </div><br/>
+
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" #email="ngModel"
+             [(ngModel)]="user.email" name="email" required
+             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="required-alert">
+        <div *ngIf="email?.errors.required">Email is required.</div>
+        <div *ngIf="email?.errors.pattern">
+          Check if your email is in the correct format.
+        </div>
+      </div><br/>
+
+      <label for="phonenumber">Phone number</label>
+      <input type="tel" class="form-control" id="phonenumber" #phonenumber="ngModel"
+             [(ngModel)]="user.phonenumber" name="phonenumber" appPhoneNumber="(\()?(\+)?(0+)?(386)(\))?"
+             pattern="^(\()?((\+)?)([\s-.\(\)\/]*\d{1}){8,13}$" required>
+      <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched)" class="required-alert">
+        <div *ngIf="phonenumber?.errors.required">Phone number is required.</div>
+        <div *ngIf="phonenumber?.errors.pattern">
+          Your phone number is not in a correct format.
+        </div>
+        <div *ngIf="phonenumber?.errors.phoneNumber">
+          The phone number is not from Slovenia. The country code (+386) is needed in the beginning.
+        </div>
+      </div><br/>
+
+      <label for="city">City</label>
+      <select class="form-control" id="city" [(ngModel)]="user.city" #city="ngModel"
+              name="city" required>
+        <option *ngFor="let city of cities" [ngValue]="city">{{city.name}}</option>
+      </select>
+      <div [hidden]="city.valid || city.pristine"
+           class="required-alert"> City is required.
+      </div><br/>
+
+      <div *ngIf="user.city">
+        <label for="zip">Zip</label>
+        <input type="text" class="form-control" id="zip" name="zip"
+               [(ngModel)]="user.city.zip" readonly>
+      </div><br/>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Submit</button>
+  </form>
+  <br/><br/></div>
+
+  <div *ngIf="userJSON" class="column ">
+    <h5>Form submitted</h5>
+    <p style="font-size: small">JSON string: {{userJSON}}</p>
+    <br/><br/>
+
+    <div class="card">
+      <h3>{{InsertedUser.name}} {{InsertedUser.surname}}</h3>
+      <hr/>
+      <p><b>Email: </b>{{InsertedUser.email}}</p>
+      <p><b>Phone number: </b>{{InsertedUser.phonenumber}}</p>
+      <p><b>City: </b>{{InsertedUser.city.name}}</p>
+      <p><b>Zip: </b>{{InsertedUser.city.zip}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442;
+}
+
+.required-alert{
+  color: #a94442;
+  font-weight: bold;
+  font-size: smaller;
+  margin-top: 5px;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 40px;
+  word-wrap: break-word;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.right{
+  margin-right: 10%;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.card-heading {
+  color: #7c795d;
+  font-family: 'Trocchi', serif;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
